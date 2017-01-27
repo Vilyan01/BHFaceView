@@ -12,4 +12,5 @@
 @interface BHFaceDetector : NSObject
 -(void)trainDetector:(NSString *)trainingDataPath;
 -(void)findFaceInImage:(UIImage *)image completion:(void (^)(CGRect face))block;
+-(BOOL)isReady;
 @end

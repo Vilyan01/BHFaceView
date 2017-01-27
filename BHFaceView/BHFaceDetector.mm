@@ -16,6 +16,7 @@ using namespace cv;
 @interface BHFaceDetector()
 @property (nonatomic) CascadeClassifier classifier;
 @property (nonatomic) dispatch_queue_t processQueue;
+@property (nonatomic) BOOL ready;
 @end
 
 @implementation BHFaceDetector
@@ -29,6 +30,7 @@ using namespace cv;
         NSLog(@"Initializing face detector");
         _classifier = CascadeClassifier();
         _processQueue = dispatch_get_global_queue(DISPATCH_QUEUE_SERIAL, 0);
+        _ready = NO;
     }
     return self;
 }
@@ -42,12 +44,17 @@ using namespace cv;
         NSLog(@"Error loading classifier");
     }
     NSLog(@"Finished training.");
+    _ready = YES;
 }
 
+-(BOOL)isReady {
+    return _ready;
+}
 /*
  Find faces in a UIImage.
 */
 -(void)findFaceInImage:(UIImage *)image completion:(void (^)(CGRect face))block {
+    if(_ready) {
     // Process this on our background queue
     dispatch_async(_processQueue, ^{
         // Declare a variable to store our face location in.
@@ -82,6 +89,7 @@ using namespace cv;
             block(faceArea);
         });
     });
+    }
 }
 
 /*

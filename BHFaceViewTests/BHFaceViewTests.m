@@ -18,7 +18,7 @@
 - (void)setUp {
     [super setUp];
     _detector = [BHFaceDetector new];
-    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt_tree" ofType:@"xml"];
+    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt2" ofType:@"xml"];
     [_detector trainDetector:trainingDataPath];
 }
 
@@ -38,6 +38,29 @@
     
     // Run the images through the facial recognition.
     [_detector findFaceInImage:obamaImage completion:^(CGRect face) {
+        XCTAssertFalse(CGRectIsNull(face), @"It should find a face");
+        [expectation fulfill];
+    }];
+    
+    // Wait for expectations
+    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error waiting for expectation: %@", [error localizedDescription]);
+        }
+    }];
+}
+
+- (void)testFindFaceInImageUsingCameraRollImage {
+    // Load up the images
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForResource:@"IMG_0728" ofType:@"JPG"];
+    
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    
+    // Create expectation for test
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Waiting for facial recognition to complete"];
+    
+    // Run the images through the facial recognition.
+    [_detector findFaceInImage:image completion:^(CGRect face) {
         XCTAssertFalse(CGRectIsNull(face), @"It should find a face");
         [expectation fulfill];
     }];

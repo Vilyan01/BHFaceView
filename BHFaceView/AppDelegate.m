@@ -17,13 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Create the face detector.
-    self.faceDetector = [BHFaceDetector new];
+    //self.faceDetector = [BHFaceDetector new];
     
     // Get classifier data to train.
-    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt_tree" ofType:@"xml"];
+   // NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt2" ofType:@"xml"];
     
     // Train the detector.
-    [self.faceDetector trainDetector:trainingDataPath];
+    //[self.faceDetector trainDetector:trainingDataPath];
     
     return YES;
 }

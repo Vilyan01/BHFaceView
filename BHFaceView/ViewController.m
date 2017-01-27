@@ -9,31 +9,34 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CoreMedia.h>
 
-@interface ViewController ()
+@interface ViewController () <AVCapturePhotoCaptureDelegate>
 // Render a circle to this image view that will circle the face in the video.
 @property (weak, nonatomic) IBOutlet UIImageView *overlayView;
 
 // AVFoundation objects we will need to use to capture images to find faces in.
 @property (strong, nonatomic) AVCaptureSession *session;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *layer;
+@property (strong, nonatomic) AVCapturePhotoOutput *imageOutput;
 
 // Facial detection properties.
-@property (weak, nonatomic) BHFaceDetector *detector;
+@property (strong, nonatomic) BHFaceDetector *detector;
 @property (strong, nonatomic) NSTimer *faceTimer;
+
+// Debug properties
+@property (strong, nonatomic) UIImage *screenshot;
 @end
 
 @implementation ViewController
 
-- (BHFaceDetector *)detector {
-    return [((AppDelegate*)[[UIApplication sharedApplication] delegate]) faceDetector];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Set up the camera.
+    [self initDetector];
     [self initCamera];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -46,8 +49,7 @@
     // Create a timer to find them faces.
     if(!_faceTimer) {
         _faceTimer = [NSTimer timerWithTimeInterval:0.5 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            // Get a snapshot from the preview
-            // Use the face detector to find faces in the snapshot.
+            [self getSnapshotFromPreview];
         }];
     }
     
@@ -64,6 +66,19 @@
     // Save resources, stop running the session and timer.
     [_session stopRunning];
     [_faceTimer invalidate];
+}
+
+- (void)getSnapshotFromPreview {
+    AVCapturePhotoSettings *settings = [AVCapturePhotoSettings photoSettings];
+    [_imageOutput capturePhotoWithSettings:settings delegate:self];
+    
+}
+
+- (void)initDetector {
+    self.detector = [BHFaceDetector new];
+    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt2" ofType:@"xml"];
+    [self.detector trainDetector:trainingDataPath];
+    
 }
 
 - (void)initCamera {
@@ -96,6 +111,12 @@
     if([_session canAddInput:deviceInput]) {
         [_session addInput:deviceInput];
     }
+    
+    // Create a photo output to capture images with.
+    _imageOutput = [AVCapturePhotoOutput new];
+    if([_session canAddOutput:_imageOutput]) {
+        [_session addOutput:_imageOutput];
+    }
 }
 
 - (void)initPreviewLayer {
@@ -103,9 +124,25 @@
         // Create a layer to display the video preview on and add it to our view.
         _layer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_session];
         _layer.frame = self.view.frame;
-        [self.view.layer addSublayer:_layer];
+        //[self.view.layer addSublayer:_layer];
     }
 }
 
+#pragma mark - Photo Capture Delegate
 
+-(void)captureOutput:(AVCapturePhotoOutput *)captureOutput didFinishProcessingPhotoSampleBuffer:(CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(AVCaptureBracketedStillImageSettings *)bracketSettings error:(NSError *)error {
+    if(photoSampleBuffer != NULL) {
+        UIImage *image = [UIImage imageWithData:[AVCapturePhotoOutput JPEGPhotoDataRepresentationForJPEGSampleBuffer:photoSampleBuffer previewPhotoSampleBuffer:previewPhotoSampleBuffer]];
+        
+        [_detector findFaceInImage:image completion:^(CGRect face) {
+            if(!CGRectIsNull(face)) {
+                NSLog(@"Found a face!");
+            }
+        }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.overlayView setImage:image];
+        });
+    }
+}
 @end

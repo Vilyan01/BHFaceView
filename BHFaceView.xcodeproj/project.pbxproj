@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880C8A121E3C0EA700D6384D /* IMG_0728.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 880C8A111E3C0EA700D6384D /* IMG_0728.JPG */; };
 		883C72381E3BCEED002F358A /* BHFaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 883C72371E3BCEED002F358A /* BHFaceDetector.mm */; };
 		883C723A1E3BD387002F358A /* haarcascade_frontalface_default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 883C72391E3BD387002F358A /* haarcascade_frontalface_default.xml */; };
 		883C723E1E3BDB51002F358A /* no_face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 883C723C1E3BDB51002F358A /* no_face.jpg */; };
@@ -39,6 +40,7 @@
 		262323610D3589A923C75B9D /* Pods-BHFaceView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BHFaceView.release.xcconfig"; path = "Pods/Target Support Files/Pods-BHFaceView/Pods-BHFaceView.release.xcconfig"; sourceTree = "<group>"; };
 		417C4B059EB08922325FD41B /* Pods-BHFaceView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BHFaceView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BHFaceView/Pods-BHFaceView.debug.xcconfig"; sourceTree = "<group>"; };
 		538E0019FFA675A8FB2C3653 /* Pods-BHFaceViewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BHFaceViewTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BHFaceViewTests/Pods-BHFaceViewTests.debug.xcconfig"; sourceTree = "<group>"; };
+		880C8A111E3C0EA700D6384D /* IMG_0728.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0728.JPG; sourceTree = "<group>"; };
 		883C72361E3BCEED002F358A /* BHFaceDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHFaceDetector.h; sourceTree = "<group>"; };
 		883C72371E3BCEED002F358A /* BHFaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BHFaceDetector.mm; sourceTree = "<group>"; };
 		883C72391E3BD387002F358A /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				883C723C1E3BDB51002F358A /* no_face.jpg */,
 				883C723D1E3BDB51002F358A /* obama_face.jpg */,
+				880C8A111E3C0EA700D6384D /* IMG_0728.JPG */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				880C8A121E3C0EA700D6384D /* IMG_0728.JPG in Resources */,
 				883C723E1E3BDB51002F358A /* no_face.jpg in Resources */,
 				883C723F1E3BDB51002F358A /* obama_face.jpg in Resources */,
 			);
