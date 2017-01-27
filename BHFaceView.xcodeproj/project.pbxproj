@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		883C72381E3BCEED002F358A /* BHFaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 883C72371E3BCEED002F358A /* BHFaceDetector.mm */; };
 		883C723A1E3BD387002F358A /* haarcascade_frontalface_default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 883C72391E3BD387002F358A /* haarcascade_frontalface_default.xml */; };
+		883C723E1E3BDB51002F358A /* no_face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 883C723C1E3BDB51002F358A /* no_face.jpg */; };
+		883C723F1E3BDB51002F358A /* obama_face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 883C723D1E3BDB51002F358A /* obama_face.jpg */; };
+		883C72411E3BEE84002F358A /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = 883C72401E3BEE84002F358A /* haarcascade_frontalface_alt.xml */; };
+		883C72441E3BEEF3002F358A /* haarcascade_frontalface_alt2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 883C72421E3BEEF3002F358A /* haarcascade_frontalface_alt2.xml */; };
+		883C72451E3BEEF3002F358A /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 883C72431E3BEEF3002F358A /* haarcascade_frontalface_alt_tree.xml */; };
 		887300011E3BC0C9003B035D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887300001E3BC0C9003B035D /* ViewController.m */; };
 		887300041E3BC0C9003B035D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 887300021E3BC0C9003B035D /* Main.storyboard */; };
 		887300061E3BC0C9003B035D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887300051E3BC0C9003B035D /* Assets.xcassets */; };
@@ -37,6 +42,11 @@
 		883C72361E3BCEED002F358A /* BHFaceDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHFaceDetector.h; sourceTree = "<group>"; };
 		883C72371E3BCEED002F358A /* BHFaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BHFaceDetector.mm; sourceTree = "<group>"; };
 		883C72391E3BD387002F358A /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
+		883C723C1E3BDB51002F358A /* no_face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = no_face.jpg; sourceTree = "<group>"; };
+		883C723D1E3BDB51002F358A /* obama_face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama_face.jpg; sourceTree = "<group>"; };
+		883C72401E3BEE84002F358A /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
+		883C72421E3BEEF3002F358A /* haarcascade_frontalface_alt2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt2.xml; sourceTree = "<group>"; };
+		883C72431E3BEEF3002F358A /* haarcascade_frontalface_alt_tree.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt_tree.xml; sourceTree = "<group>"; };
 		887300001E3BC0C9003B035D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		887300031E3BC0C9003B035D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		887300051E3BC0C9003B035D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,9 +125,19 @@
 			name = models;
 			sourceTree = "<group>";
 		};
+		883C723B1E3BDB48002F358A /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				883C723C1E3BDB51002F358A /* no_face.jpg */,
+				883C723D1E3BDB51002F358A /* obama_face.jpg */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
 		887300121E3BC0C9003B035D /* BHFaceViewTests */ = {
 			isa = PBXGroup;
 			children = (
+				883C723B1E3BDB48002F358A /* resources */,
 				887300131E3BC0C9003B035D /* BHFaceViewTests.m */,
 				887300151E3BC0C9003B035D /* Info.plist */,
 			);
@@ -158,6 +178,9 @@
 		8873FFF91E3BC0C9003B035D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				883C72421E3BEEF3002F358A /* haarcascade_frontalface_alt2.xml */,
+				883C72431E3BEEF3002F358A /* haarcascade_frontalface_alt_tree.xml */,
+				883C72401E3BEE84002F358A /* haarcascade_frontalface_alt.xml */,
 				883C72391E3BD387002F358A /* haarcascade_frontalface_default.xml */,
 				887300051E3BC0C9003B035D /* Assets.xcassets */,
 				8873000A1E3BC0C9003B035D /* Info.plist */,
@@ -265,6 +288,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883C723E1E3BDB51002F358A /* no_face.jpg in Resources */,
+				883C723F1E3BDB51002F358A /* obama_face.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,10 +297,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883C72441E3BEEF3002F358A /* haarcascade_frontalface_alt2.xml in Resources */,
+				883C72411E3BEE84002F358A /* haarcascade_frontalface_alt.xml in Resources */,
 				887300091E3BC0C9003B035D /* LaunchScreen.storyboard in Resources */,
 				887300061E3BC0C9003B035D /* Assets.xcassets in Resources */,
 				883C723A1E3BD387002F358A /* haarcascade_frontalface_default.xml in Resources */,
 				887300041E3BC0C9003B035D /* Main.storyboard in Resources */,
+				883C72451E3BEEF3002F358A /* haarcascade_frontalface_alt_tree.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

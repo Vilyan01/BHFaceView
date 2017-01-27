@@ -20,7 +20,7 @@
     self.faceDetector = [BHFaceDetector new];
     
     // Get classifier data to train.
-    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_default" ofType:@"xml"];
+    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt_tree" ofType:@"xml"];
     
     // Train the detector.
     [self.faceDetector trainDetector:trainingDataPath];

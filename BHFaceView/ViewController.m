@@ -18,7 +18,9 @@
 @property (strong, nonatomic) AVCaptureSession *session;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *layer;
 
+// Facial detection properties.
 @property (weak, nonatomic) BHFaceDetector *detector;
+@property (strong, nonatomic) NSTimer *faceTimer;
 @end
 
 @implementation ViewController
@@ -40,6 +42,17 @@
     
     // Start the preview
     [_session startRunning];
+    
+    // Create a timer to find them faces.
+    if(!_faceTimer) {
+        _faceTimer = [NSTimer timerWithTimeInterval:0.5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            // Get a snapshot from the preview
+            // Use the face detector to find faces in the snapshot.
+        }];
+    }
+    
+    // Add the timer to the run loop.
+    [[NSRunLoop mainRunLoop] addTimer:_faceTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +61,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    // Save resources, stop running the session and timer.
     [_session stopRunning];
+    [_faceTimer invalidate];
 }
 
 - (void)initCamera {

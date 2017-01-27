@@ -7,16 +7,19 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "BHFaceDetector.h"
 
 @interface BHFaceViewTests : XCTestCase
-
+@property (strong, nonatomic) BHFaceDetector *detector;
 @end
 
 @implementation BHFaceViewTests
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    _detector = [BHFaceDetector new];
+    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt_tree" ofType:@"xml"];
+    [_detector trainDetector:trainingDataPath];
 }
 
 - (void)tearDown {
@@ -24,15 +27,45 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testFindFaceInImage {
+    // Load up the images
+    NSString *obamaPath = [[NSBundle bundleForClass:self.class] pathForResource:@"obama_face" ofType:@"jpg"];
+    
+    UIImage *obamaImage = [UIImage imageWithContentsOfFile:obamaPath];
+    
+    // Create expectation for test
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Waiting for facial recognition to complete"];
+    
+    // Run the images through the facial recognition.
+    [_detector findFaceInImage:obamaImage completion:^(CGRect face) {
+        XCTAssertFalse(CGRectIsNull(face), @"It should find a face");
+        [expectation fulfill];
+    }];
+    
+    // Wait for expectations
+    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error waiting for expectation: %@", [error localizedDescription]);
+        }
+    }];
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+- (void)testFindFaceInImageFail {
+    NSString *noFacePath = [[NSBundle bundleForClass:self.class] pathForResource:@"no_face" ofType:@"jpg"];
+    UIImage *noFace = [UIImage imageWithContentsOfFile:noFacePath];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Waiting for facial recognition to complete"];
+
+    [_detector findFaceInImage:noFace completion:^(CGRect face) {
+        XCTAssertTrue(CGRectIsNull(face), @"it should not find a face");
+        [expectation fulfill];
+    }];
+    
+    // Wait for expectations
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error waiting for expectation: %@", [error localizedDescription]);
+        }
     }];
 }
 
