@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BHFaceDetector.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic, readonly) BHFaceDetector *faceDetector;
 
 
 @end

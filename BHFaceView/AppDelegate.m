@@ -9,14 +9,22 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
-
+@property (strong, nonatomic) BHFaceDetector *faceDetector;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Create the face detector.
+    self.faceDetector = [BHFaceDetector new];
+    
+    // Get classifier data to train.
+    NSString *trainingDataPath = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_default" ofType:@"xml"];
+    
+    // Train the detector.
+    [self.faceDetector trainDetector:trainingDataPath];
+    
     return YES;
 }
 
