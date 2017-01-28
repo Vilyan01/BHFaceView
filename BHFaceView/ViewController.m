@@ -136,7 +136,7 @@
         
         [_detector findFaceInImage:image completion:^(CGRect face) {
             if(!CGRectIsNull(face)) {
-                NSLog(@"Found a face!");
+                NSLog(@"Found a face at origin: %f, %f", face.origin.x, face.origin.y);
             }
         }];
         
