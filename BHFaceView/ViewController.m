@@ -124,7 +124,7 @@
         // Create a layer to display the video preview on and add it to our view.
         _layer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_session];
         _layer.frame = self.view.frame;
-        //[self.view.layer addSublayer:_layer];
+        [self.view.layer addSublayer:_layer];
     }
 }
 
@@ -139,10 +139,6 @@
                 NSLog(@"Found a face at origin: %f, %f", face.origin.x, face.origin.y);
             }
         }];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.overlayView setImage:image];
-        });
     }
 }
 @end
